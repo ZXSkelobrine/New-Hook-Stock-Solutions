@@ -9,8 +9,13 @@ import com.github.ZXSkelobrine.stock.windows.stock.StockOverview;
 
 public class Launcher {
 
+	public static final int MAJOR_VERSION = 1;
+	public static final int EXPORT_VERSION = 0;
+	public static final int MINOR_VERSION = 1;
+	
 	public static final boolean TESTING = false;
-	public static final String VERSION = "1.0.1";
+	
+	public static final String VERSION = MAJOR_VERSION + "." + EXPORT_VERSION + "." + MINOR_VERSION;
 	public static final String NAME = "New Hook Stock";
 	public static final String BASE_SAVE_PATH = System.getProperty("user.home") + "/" + NAME;
 

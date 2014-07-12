@@ -97,15 +97,13 @@ public class SQLFunctions {
 			File file = new File(systemStockPath);
 			// Check if the file exists
 			if (!file.exists()) {
-				//Check if the parent folders exist.
-				if(!file.getParentFile().exists()){
-					//If is doesn't create the folders
+				// Check if the parent folders exist.
+				if (!file.getParentFile().exists()) {
+					// If is doesn't create the folders
 					file.getParentFile().mkdirs();
 				}
 				// If it doesn't create it
 				file.createNewFile();
-				// Then create the tables
-				prepareTables();
 			}
 			// Initialise the database drivers.
 			Class.forName("org.sqlite.JDBC");
@@ -117,18 +115,25 @@ public class SQLFunctions {
 				// If they are null then do not use them in the connection.
 				connection = DriverManager.getConnection("jdbc:sqlite:" + systemStockPath);
 			}
-			// Once the connection has been made, create the statement and store
-			// it,
-			statement = connection.createStatement();
-			// Test the tables.
-			statement.executeQuery("SELECT * FROM PRODUCTS");
-			// Once the connection has been opened, set prepared to true to stop
-			// NotPreparedExceptions.
-			prepared = true;
-			// Return true to show valid completion
-			return true;
-			// Check for any errors
-		} catch (ClassNotFoundException | SQLException | IOException | NotPreparedException e) {
+			if (connection != null) {
+				// Once the connection has been made, create the statement and
+				// store
+				// it,
+				statement = connection.createStatement();
+
+				// Test the tables.
+				statement.executeQuery("SELECT * FROM PRODUCTS");
+				// Once the connection has been opened, set prepared to true to
+				// stop
+				// NotPreparedExceptions.
+				prepared = true;
+				// Return true to show valid completion
+				return true;
+				// Check for any errors
+			} else {
+				return false;
+			}
+		} catch (ClassNotFoundException | SQLException | IOException e) {
 			// Check the error to see if the table needs to be created
 			if (e.getMessage().contains("no such table: PRODUCTS")) {
 				// If so try to create the tables
@@ -137,7 +142,9 @@ public class SQLFunctions {
 					// Then run the method again (if the retry is low enough)
 					// and increment the count
 					if (retryCount < RETRY_MAX) {
-						prepareDatabaseConnection(systemStockPath, username, password);
+						if (prepareDatabaseConnection(systemStockPath, username, password)) {
+							System.out.println("Worked");
+						}
 					} else {
 						// If not throw and error
 						throw new TableCreationError(systemStockPath, retryCount);
@@ -168,6 +175,8 @@ public class SQLFunctions {
 		try {
 			// Try to create a new table in the database
 			statement.executeUpdate("CREATE TABLE \"PRODUCTS\" (\"barcode\"  bigint,\"date\"  text,\"amount\"  int,\"name\"  text,\"price\"  decimal,\"category\"  text,\"manufacturer\"  text,\"restock\"  TEXT,\"restock_last\"  TEXT);");
+			statement.executeUpdate("INSERT INTO \"main\".\"PRODUCTS\" (\"barcode\", \"date\", \"amount\", \"name\", \"price\", \"category\", \"manufacturer\", \"restock\", \"restock_last\", \"ROWID\") VALUES (7852143698245, '12/8/2015', 1, 'Engine', 125.99, 'Cars', 'Unknown', '1/9/2015', '5/7/2014', 1);");
+			statement.executeUpdate("INSERT INTO \"main\".\"PRODUCTS\" (\"barcode\", \"date\", \"amount\", \"name\", \"price\", \"category\", \"manufacturer\", \"restock\", \"restock_last\", \"ROWID\") VALUES (5036905000123, '30/2/2015', 100, 'Pass The Pigs Deluxe', 5.49, 'Toys and Games', 'Winning Moves', '6/7/2014', '5/7/2014', 2);");
 			// If this works then return true to signal that the process has
 			// completed successfully.
 			return true;
