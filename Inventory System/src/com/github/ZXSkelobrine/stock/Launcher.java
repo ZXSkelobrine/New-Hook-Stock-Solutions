@@ -11,7 +11,7 @@ import com.github.ZXSkelobrine.stock.windows.stock.StockOverview;
 public class Launcher {
 
 	public static final int MAJOR_VERSION = 1;
-	public static final int EXPORT_VERSION = 2;
+	public static final int EXPORT_VERSION = 3;
 	public static final int MINOR_VERSION = 4;
 
 	public static final boolean TESTING = false;
