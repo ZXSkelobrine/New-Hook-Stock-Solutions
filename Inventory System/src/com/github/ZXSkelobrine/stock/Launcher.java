@@ -6,6 +6,7 @@ import com.github.ZXSkelobrine.stock.global.sql.SQLFunctions;
 import com.github.ZXSkelobrine.stock.global.updates.UpdateManager;
 import com.github.ZXSkelobrine.stock.management.errors.NotPreparedException;
 import com.github.ZXSkelobrine.stock.management.windows.stock.StockOverview;
+import com.github.ZXSkelobrine.stock.shop.windows.ShopWindow;
 
 public class Launcher {
 
@@ -23,13 +24,13 @@ public class Launcher {
 		if (TESTING) {
 			System.out.println(BASE_SAVE_PATH + "/databases/stock/stock.db");
 		} else {
+			try {
+				UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
+				UpdateManager.checkForUpdate();
+			} catch (Throwable e1) {
+				e1.printStackTrace();
+			}
 			if (args.length == 0) {
-				try {
-					UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
-					UpdateManager.checkForUpdate();
-				} catch (Throwable e1) {
-					e1.printStackTrace();
-				}
 				if (UpdateManager.updateAvailable) {
 					UpdateManager.processUpdate();
 				} else {
@@ -48,10 +49,12 @@ public class Launcher {
 					} else {
 					}
 				}
-			} else if (args.length == 1) {
+			} else if (args.length >= 1) {
 				switch (args[0]) {
 				case "shop":
-
+					if (args.length == 2) {
+						ShopWindow.launchWindow(Integer.parseInt(args[1]));
+					}
 					break;
 				}
 			}
