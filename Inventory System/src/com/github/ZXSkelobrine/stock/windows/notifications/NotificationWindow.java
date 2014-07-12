@@ -14,7 +14,8 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import com.github.ZXSkelobrine.stock.tests.UpdateManager;
+import com.github.ZXSkelobrine.stock.updates.UpdateManager;
+
 import javax.swing.JScrollPane;
 
 public class NotificationWindow extends JFrame {

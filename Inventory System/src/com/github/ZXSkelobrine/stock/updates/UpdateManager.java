@@ -1,4 +1,4 @@
-package com.github.ZXSkelobrine.stock.tests;
+package com.github.ZXSkelobrine.stock.updates;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +25,7 @@ import com.github.ZXSkelobrine.stock.windows.notifications.NotificationWindow.Bu
 public class UpdateManager {
 
 	private static String downloadedFileName;
+	public static boolean updateAvailable = false;
 	private static String versionAppend;
 
 	private static void launchUpdateProcedure() throws IOException {
@@ -99,20 +100,23 @@ public class UpdateManager {
 				int major = Integer.parseInt(Character.toString(formatting.charAt(0)));
 				int export = Integer.parseInt(Character.toString(formatting.charAt(2)));
 				int minor = Integer.parseInt(Character.toString(formatting.charAt(4)));
-				// int minor = 7;
 				downloadedFileName = "New Hook Stock Solutions-" + major + "." + export + "." + minor + ".jar";
 				versionAppend = major + "." + export + "." + minor;
 				if (major > Launcher.MAJOR_VERSION || export > Launcher.EXPORT_VERSION || minor > Launcher.MINOR_VERSION) {
-					UpdateWindow.launchWindow("New version available: " + major + "." + export + "." + minor);
+					updateAvailable = true;
 				}
 			}
 		}
 	}
 
+	public static void processUpdate() {
+		UpdateWindow.launchWindow("New version available: " + versionAppend);
+	}
+
 	public static void startUpdate() throws IOException {
 		downloadFile(versionAppend);
 	}
-	
+
 	public static void main(String[] args) {
 		try {
 			checkForUpdate();
