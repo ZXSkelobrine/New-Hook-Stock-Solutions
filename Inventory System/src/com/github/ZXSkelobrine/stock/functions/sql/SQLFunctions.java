@@ -144,6 +144,7 @@ public class SQLFunctions {
 					if (retryCount < RETRY_MAX) {
 						if (prepareDatabaseConnection(systemStockPath, username, password)) {
 							System.out.println("Worked");
+							return true;
 						}
 					} else {
 						// If not throw and error
@@ -155,13 +156,15 @@ public class SQLFunctions {
 					return false;
 				}
 
+			} else {
+				// If any errors arrise, print their logs and..
+				e.printStackTrace();
+				prepared = false;
+				// Return false to show invalid completion
+				return false;
 			}
-			// If any errors arrise, print their logs and..
-			e.printStackTrace();
-			prepared = false;
-			// Return false to show invalid completion
-			return false;
 		}
+		return false;
 	}
 
 	/**
