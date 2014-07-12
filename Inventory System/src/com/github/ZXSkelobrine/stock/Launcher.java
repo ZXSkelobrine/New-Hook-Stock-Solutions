@@ -1,12 +1,11 @@
 package com.github.ZXSkelobrine.stock;
 
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
-import com.github.ZXSkelobrine.stock.errors.NotPreparedException;
-import com.github.ZXSkelobrine.stock.functions.sql.SQLFunctions;
-import com.github.ZXSkelobrine.stock.updates.UpdateManager;
-import com.github.ZXSkelobrine.stock.windows.stock.StockOverview;
+import com.github.ZXSkelobrine.stock.global.sql.SQLFunctions;
+import com.github.ZXSkelobrine.stock.global.updates.UpdateManager;
+import com.github.ZXSkelobrine.stock.management.errors.NotPreparedException;
+import com.github.ZXSkelobrine.stock.management.windows.stock.StockOverview;
 
 public class Launcher {
 
@@ -24,32 +23,36 @@ public class Launcher {
 		if (TESTING) {
 			System.out.println(BASE_SAVE_PATH + "/databases/stock/stock.db");
 		} else {
-			try {
-				UpdateManager.checkForUpdate();
-			} catch (Throwable e1) {
-				e1.printStackTrace();
-			}
-			if (UpdateManager.updateAvailable) {
-				UpdateManager.processUpdate();
-			} else {
-				if (SQLFunctions.prepareDatabaseConnection(BASE_SAVE_PATH + "/databases/stock/stock.db", null, null)) {
-					try {
-						UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
-					} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-						e.printStackTrace();
-					}
-					StockOverview.launchWindow();
-					Runtime.getRuntime().addShutdownHook(new Thread() {
-						@Override
-						public void run() {
-							try {
-								SQLFunctions.closeDatabase();
-							} catch (NotPreparedException e) {
-								e.printStackTrace();
-							}
-						}
-					});
+			if (args.length == 0) {
+				try {
+					UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
+					UpdateManager.checkForUpdate();
+				} catch (Throwable e1) {
+					e1.printStackTrace();
+				}
+				if (UpdateManager.updateAvailable) {
+					UpdateManager.processUpdate();
 				} else {
+					if (SQLFunctions.prepareDatabaseConnection(BASE_SAVE_PATH + "/databases/stock/stock.db", null, null)) {
+						StockOverview.launchWindow();
+						Runtime.getRuntime().addShutdownHook(new Thread() {
+							@Override
+							public void run() {
+								try {
+									SQLFunctions.closeDatabase();
+								} catch (NotPreparedException e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					} else {
+					}
+				}
+			} else if (args.length == 1) {
+				switch (args[0]) {
+				case "shop":
+
+					break;
 				}
 			}
 		}
