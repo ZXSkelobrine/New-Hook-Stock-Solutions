@@ -192,7 +192,7 @@ public class Launcher {
 			UpdateManager.checkForUpdate();
 		} catch (Throwable e1) {
 			// Print a brief description of the error.
-			System.out.println("[Apply LAF]: Error setting SeaGlass LAF(Throwable). Contact the author or run this program with -showSTs to print the stack traces.");
+			System.out.println("[Apply LAF]: Error setting SeaGlass LAF - Try running with '-customLaf: window' command line flags.(Throwable). Contact the author or run this program with -showSTs to print the stack traces.");
 			// If it does not print the stack trace for error logging if
 			// it is enabled.
 			if (Launcher.PRINT_STACK_TRACES) {
