@@ -11,6 +11,9 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+
+import com.github.ZXSkelobrine.stock.Launcher;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -29,7 +32,14 @@ public class ErrorWindow extends JFrame {
 					ErrorWindow frame = new ErrorWindow(error);
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Launch Window (Error Window)]: Error initializing and showing frame(Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if
+					// it
+					// is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});

@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import com.github.ZXSkelobrine.stock.Launcher;
 import com.github.ZXSkelobrine.stock.global.sql.SQLFunctions;
 import com.github.ZXSkelobrine.stock.global.variables.Date;
 import com.github.ZXSkelobrine.stock.global.variables.Stock;
@@ -58,7 +59,14 @@ public class StockInsert extends JFrame {
 					frame.parent = parent;
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Launch Window (Stock Insert)]: Error initializing and showing frame(Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if
+					// it
+					// is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});
@@ -164,7 +172,13 @@ public class StockInsert extends JFrame {
 				} catch (NotPreparedException e1) {
 					lblError.setText("Error: " + e1.getLocalizedMessage() + "\tSee console for full error.");
 					lblError.setVisible(true);
-					e1.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Button Press (Stock Insert)]: Error inserting stock(Not Prepared Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if
+					// it is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e1.printStackTrace();
+					}
 				}
 			}
 		});

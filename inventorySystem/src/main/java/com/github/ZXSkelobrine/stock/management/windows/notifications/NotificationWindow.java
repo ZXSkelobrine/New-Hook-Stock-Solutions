@@ -15,6 +15,7 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.github.ZXSkelobrine.stock.Launcher;
 import com.github.ZXSkelobrine.stock.global.updates.UpdateManager;
 
 public class NotificationWindow extends JFrame {
@@ -41,7 +42,13 @@ public class NotificationWindow extends JFrame {
 					frame.setupButtons();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Launch Window (Notification Window)]: Error initializing and showing frame(Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if it
+					// is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});
@@ -63,7 +70,13 @@ public class NotificationWindow extends JFrame {
 					frame.setupButtons();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Launch Window (Notification Window)]: Error initializing and showing frame(Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if it
+					// is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});

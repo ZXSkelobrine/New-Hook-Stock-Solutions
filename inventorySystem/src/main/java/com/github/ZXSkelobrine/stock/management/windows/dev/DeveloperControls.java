@@ -53,7 +53,13 @@ public class DeveloperControls extends JFrame {
 					DeveloperControls frame = new DeveloperControls();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Launch Window (Developer Controls)]: Error initializing and showing frame(Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if it
+					// is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});

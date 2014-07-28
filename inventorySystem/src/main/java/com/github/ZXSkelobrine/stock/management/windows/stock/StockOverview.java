@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.github.ZXSkelobrine.stock.Launcher;
 import com.github.ZXSkelobrine.stock.global.sql.SQLFunctions;
 import com.github.ZXSkelobrine.stock.global.variables.Date;
 import com.github.ZXSkelobrine.stock.global.variables.Stock;
@@ -103,7 +104,13 @@ public class StockOverview extends JFrame {
 					StockOverview frame = new StockOverview();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Launch Window (Stock Overview)]: Error initializing and showing frame(Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if it
+					// is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});
@@ -523,7 +530,13 @@ public class StockOverview extends JFrame {
 				try {
 					SQLFunctions.closeDatabase();
 				} catch (NotPreparedException e) {
-					e.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Button Press (Stock Overview)]: Error closing database(Not Prepared Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if
+					// it is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});

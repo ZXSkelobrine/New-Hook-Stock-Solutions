@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import com.github.ZXSkelobrine.stock.Launcher;
 import com.github.ZXSkelobrine.stock.global.variables.Stock;
 
 public class Printer implements Printable {
@@ -25,7 +26,13 @@ public class Printer implements Printable {
 			try {
 				job.print();
 			} catch (PrinterException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Print]: Error printing(PrinterException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -84,7 +91,13 @@ public class Printer implements Printable {
 				}
 			}
 		} catch (PrinterException e) {
-			e.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Print Stock]: Error printing stock(PrinterException). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if it
+			// is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e.printStackTrace();
+			}
 		}
 
 	}

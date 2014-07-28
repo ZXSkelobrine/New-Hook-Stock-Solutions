@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.github.ZXSkelobrine.stock.Launcher;
 import com.github.ZXSkelobrine.stock.management.functions.windows.WindowFunctions;
 import com.github.ZXSkelobrine.stock.management.windows.enums.Window;
 
@@ -47,7 +48,14 @@ public class DeveloperLock extends JFrame {
 					DeveloperLock frame = new DeveloperLock();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Launch Window (DeveloperLock)]: Error initializing and showing frame(Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if
+					// it
+					// is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});

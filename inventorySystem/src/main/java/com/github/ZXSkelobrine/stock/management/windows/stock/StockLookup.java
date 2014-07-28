@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.github.ZXSkelobrine.stock.Launcher;
 import com.github.ZXSkelobrine.stock.global.sql.SQLFunctions;
 import com.github.ZXSkelobrine.stock.global.variables.Stock;
 import com.github.ZXSkelobrine.stock.management.errors.NotPreparedException;
@@ -119,7 +120,13 @@ public class StockLookup extends JFrame {
 					StockLookup frame = new StockLookup();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Launch Window (Stock Lookup)]: Error initializing and showing frame(Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if it
+					// is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});
@@ -436,7 +443,13 @@ public class StockLookup extends JFrame {
 					names.toArray(namesArray);
 					list.setListData(namesArray);
 				} catch (NotPreparedException e1) {
-					e1.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Button Press (Stock Lookup)]: Error looking up stock(Not Prepared Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if
+					// it is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e1.printStackTrace();
+					}
 				}
 			}
 		});

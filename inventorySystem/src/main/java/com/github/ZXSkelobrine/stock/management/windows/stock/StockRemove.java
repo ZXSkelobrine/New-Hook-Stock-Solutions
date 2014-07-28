@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import com.github.ZXSkelobrine.stock.Launcher;
 import com.github.ZXSkelobrine.stock.global.sql.SQLFunctions;
 import com.github.ZXSkelobrine.stock.global.variables.Stock;
 import com.github.ZXSkelobrine.stock.management.errors.NotPreparedException;
@@ -58,7 +59,13 @@ public class StockRemove extends JFrame {
 					frame.parent = owner;
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Launch Window (Stock Remove)]: Error initializing and showing frame(Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if it
+					// is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});
@@ -166,7 +173,13 @@ public class StockRemove extends JFrame {
 			mf.setMask(sb.toString());
 			mf.setPlaceholderCharacter('-');
 		} catch (ParseException e1) {
-			e1.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Constuctor (Stock Remove)]: Error setting masks(ParseException). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if
+			// it is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e1.printStackTrace();
+			}
 		}
 
 		txtAmount = new JFormattedTextField(mf);
@@ -340,11 +353,17 @@ public class StockRemove extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					SQLFunctions.removeStock(removed, Integer.parseInt(txtAmount.getText().split("/")[0]), Integer.parseInt(txtAmount.getText().split("/")[1]));
-				} catch (Exception e1) {
+				} catch (NumberFormatException e1) {
 					lblError.setText("Error: Please enter a valid amount.");
 					lblError.setVisible(true);
 				} catch (NotPreparedException e1) {
-					e1.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Button Press (Stock Remove)]: Error removing stock(Not Prepared Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if
+					// it is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e1.printStackTrace();
+					}
 				} finally {
 					parent.refreshStockList();
 					dispose();

@@ -1,5 +1,6 @@
 package com.github.ZXSkelobrine.stock.global.variables;
 
+import com.github.ZXSkelobrine.stock.Launcher;
 import com.github.ZXSkelobrine.stock.global.sql.SQLFunctions;
 import com.github.ZXSkelobrine.stock.management.errors.NotPreparedException;
 
@@ -99,7 +100,13 @@ public class Stock {
 		try {
 			SQLFunctions.updateBarcode(barcode, name);
 		} catch (NotPreparedException e) {
-			e.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Set Barcode]: Error updating the barcode(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if it
+			// is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -119,7 +126,13 @@ public class Stock {
 		try {
 			SQLFunctions.updateExpiry(expiry, barcode);
 		} catch (NotPreparedException e) {
-			e.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Set Expiry]: Error updating the expiry date(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if it
+			// is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -139,7 +152,13 @@ public class Stock {
 		try {
 			SQLFunctions.updateAmount(amount, barcode);
 		} catch (NotPreparedException e) {
-			e.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Set Amount]: Error updating the amount(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if it
+			// is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -159,7 +178,13 @@ public class Stock {
 		try {
 			SQLFunctions.updateName(name, barcode);
 		} catch (NotPreparedException e) {
-			e.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Set Name]: Error updating the name(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if it
+			// is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -179,7 +204,13 @@ public class Stock {
 		try {
 			SQLFunctions.updatePrice(price, barcode);
 		} catch (NotPreparedException e) {
-			e.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Set Price]: Error updating the price(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if it
+			// is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -199,7 +230,13 @@ public class Stock {
 		try {
 			SQLFunctions.updateCategory(category, barcode);
 		} catch (NotPreparedException e) {
-			e.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Set Category]: Error updating the category(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if it
+			// is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -219,7 +256,13 @@ public class Stock {
 		try {
 			SQLFunctions.updateManufacturer(manufacturer, barcode);
 		} catch (NotPreparedException e) {
-			e.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Set Manufacturer]: Error updating the manufacturer(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if it
+			// is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -239,7 +282,13 @@ public class Stock {
 		try {
 			SQLFunctions.updateNextRestock(nextRestock, barcode);
 		} catch (NotPreparedException e) {
-			e.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Set Next Restock]: Error updating the next restock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if it
+			// is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -259,7 +308,13 @@ public class Stock {
 		try {
 			SQLFunctions.updateLastRestock(lastRestock, barcode);
 		} catch (NotPreparedException e) {
-			e.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Set Last Restock]: Error updating the last restock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if it
+			// is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e.printStackTrace();
+			}
 		}
 	}
 

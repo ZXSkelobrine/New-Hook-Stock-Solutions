@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.ZXSkelobrine.stock.Launcher;
 import com.github.ZXSkelobrine.stock.global.variables.Date;
 import com.github.ZXSkelobrine.stock.global.variables.Stock;
 import com.github.ZXSkelobrine.stock.management.errors.NotPreparedException;
@@ -152,15 +153,27 @@ public class SQLFunctions {
 					}
 					retryCount++;
 				} catch (NotPreparedException | TableCreationError e1) {
-					e1.printStackTrace();
+					// Print a brief description of the error.
+					System.out.println("[Prepare Database Connection]: Error preparing tables(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+					// If it does not print the stack trace for error logging if
+					// it
+					// is enabled.
+					if (Launcher.PRINT_STACK_TRACES) {
+						e.printStackTrace();
+					}
+					// And return false to show that it failed
 					return false;
 				}
 
 			} else {
-				// If any errors arrise, print their logs and..
-				e.printStackTrace();
-				prepared = false;
-				// Return false to show invalid completion
+				// Print a brief description of the error.
+				System.out.println("[Prepare Database Connection]: Error preparing tables(ClassNotFoundException | SQLException | IOException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
+				// And return false to show that it failed
 				return false;
 			}
 		}
@@ -184,8 +197,13 @@ public class SQLFunctions {
 			// completed successfully.
 			return true;
 		} catch (SQLException e) {
-			// If it does not print the stack trace for error logging.
-			e.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Prepare Tables]: Error preparing tables(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if it
+			// is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e.printStackTrace();
+			}
 			// And return false to show that it failed
 			return false;
 		}
@@ -201,7 +219,13 @@ public class SQLFunctions {
 					list.add(stock);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Stock Lookup By Where Clause]: Error looking up stock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			throw new NotPreparedException("SQLFunctions: stockLookUpByWhereClause(String)");
@@ -237,8 +261,13 @@ public class SQLFunctions {
 				}
 				// Catch any SQLExcections
 			} catch (SQLException e) {
-				// If so print the stack trace
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Stock Lookup By Barcode]: Error looking up stock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 			}
 			// If it is not prepared
 		} else {
@@ -269,7 +298,13 @@ public class SQLFunctions {
 					list.add(stock);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Stock Lookup By Next Restock]: Error looking up stock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			throw new NotPreparedException("SQLFunctions: stockLookUpByDate(Date)");
@@ -297,7 +332,13 @@ public class SQLFunctions {
 					list.add(stock);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Stock Lookup By Last Restock]: Error looking up stock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			throw new NotPreparedException("SQLFunctions: stockLookUpByDate(Date)");
@@ -325,7 +366,13 @@ public class SQLFunctions {
 					list.add(stock);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Stock Lookup By Expiry]: Error looking up stock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			throw new NotPreparedException("SQLFunctions: stockLookUpByExpiry(Date)");
@@ -353,7 +400,13 @@ public class SQLFunctions {
 					list.add(stock);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Stock Lookup By Amount]: Error looking up stock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			throw new NotPreparedException("SQLFunctions: stockLookUpByAmount(int)");
@@ -381,7 +434,13 @@ public class SQLFunctions {
 					list.add(stock);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Stock Lookup By Name]: Error looking up stock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			throw new NotPreparedException("SQLFunctions: stockLookUpByName(String)");
@@ -409,7 +468,13 @@ public class SQLFunctions {
 					list.add(stock);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Stock Lookup By Price]: Error looking up stock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			throw new NotPreparedException("SQLFunctions: stockLookUpByPrice(double)");
@@ -437,7 +502,13 @@ public class SQLFunctions {
 					list.add(stock);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Stock Lookup By Category]: Error looking up stock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			throw new NotPreparedException("SQLFunctions: stockLookUpByCategory(String)");
@@ -465,7 +536,13 @@ public class SQLFunctions {
 					list.add(stock);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Stock Lookup By Manufacturer]: Error looking up stock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			throw new NotPreparedException("SQLFunctions: stockLookUpByManufacturer(String)");
@@ -490,7 +567,14 @@ public class SQLFunctions {
 					list.add(stock);
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Get All Stock]: Error getting all stock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
+				// And return false to show that it failed
 			}
 		} else {
 			throw new NotPreparedException("SQLFunctions: getAllStock()");
@@ -513,8 +597,13 @@ public class SQLFunctions {
 				statement.executeUpdate("INSERT INTO PRODUCTS VALUES(" + stock.getBarcode() + ", \"" + stock.getExpiry().getFormatedDate() + "\", " + stock.getAmount() + ", \"" + stock.getName() + "\", " + stock.getPrice() + ", \"" + stock.getCategory() + "\", \"" + stock.getManufacturer() + "\", \"" + stock.getNextRestock().getFormatedDate() + "\", \"" + stock.getLastRestock().getFormatedDate() + "\");");
 				return true;
 			} catch (SQLException e) {
-				// If it does not print the stack trace for error logging.
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Add Stock]: Error adding the stock (SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 				// And return false to show that it failed
 				return false;
 			}
@@ -540,7 +629,14 @@ public class SQLFunctions {
 				statement.executeUpdate("UPDATE PRODUCTS SET barcode = " + barcode + " WHERE name = \"" + name + "\";");
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Update Barcode]: Error updating barcodes (SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
+				// And return false to show that it failed
 				return false;
 			}
 		} else {
@@ -565,7 +661,14 @@ public class SQLFunctions {
 				statement.executeUpdate("UPDATE PRODUCTS SET restock = \"" + expiry.getFormatedDate() + "\" WHERE barcode = " + barcode + ";");
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Update Expiry]: Error updating the exipiry date (SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
+				// And return false to show that it failed
 				return false;
 			}
 		} else {
@@ -590,7 +693,14 @@ public class SQLFunctions {
 				statement.executeUpdate("UPDATE PRODUCTS SET amount = " + amount + " WHERE barcode = " + barcode + ";");
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Update Amount]: Error updating the amount (SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
+				// And return false to show that it failed
 				return false;
 			}
 		} else {
@@ -615,7 +725,14 @@ public class SQLFunctions {
 				statement.executeUpdate("UPDATE PRODUCTS SET name = \"" + name + "\" WHERE barcode = " + barcode + ";");
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Update Name]: Error updating the name(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
+				// And return false to show that it failed
 				return false;
 			}
 		} else {
@@ -640,7 +757,14 @@ public class SQLFunctions {
 				statement.executeUpdate("UPDATE PRODUCTS SET price = " + price + " WHERE barcode = " + barcode + ";");
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Update Price]: Error updating the price(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
+				// And return false to show that it failed
 				return false;
 			}
 		} else {
@@ -665,7 +789,14 @@ public class SQLFunctions {
 				statement.executeUpdate("UPDATE PRODUCTS SET category = \"" + category + "\" WHERE barcode = " + barcode + ";");
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Update Category]: Error updating the category(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
+				// And return false to show that it failed
 				return false;
 			}
 		} else {
@@ -690,7 +821,14 @@ public class SQLFunctions {
 				statement.executeUpdate("UPDATE PRODUCTS SET manufacturer = \"" + manufacturer + "\" WHERE barcode = " + barcode + ";");
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Update Manufacturer]: Error updating the manufacturer(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
+				// And return false to show that it failed
 				return false;
 			}
 		} else {
@@ -715,7 +853,14 @@ public class SQLFunctions {
 				statement.executeUpdate("UPDATE PRODUCTS SET restock = \"" + nextDate.getFormatedDate() + "\" WHERE barcode = " + barcode + ";");
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Update Next Restock]: Error updating the next restock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
+				// And return false to show that it failed
 				return false;
 			}
 		} else {
@@ -740,7 +885,14 @@ public class SQLFunctions {
 				statement.executeUpdate("UPDATE PRODUCTS SET restock_last = \"" + lastDate.getFormatedDate() + "\" WHERE barcode = " + barcode + ";");
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Update Last Restock]: Error updating the last restock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
+				// And return false to show that it failed
 				return false;
 			}
 		} else {
@@ -774,7 +926,14 @@ public class SQLFunctions {
 				}
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Remove Stock]: Error removing the stock(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
+				// And return false to show that it failed
 				return false;
 			}
 		} else {
@@ -798,8 +957,13 @@ public class SQLFunctions {
 				prepared = false;
 				return true;
 			} catch (SQLException e) {
-				// If it does not print the stack trace for error logging.
-				e.printStackTrace();
+				// Print a brief description of the error.
+				System.out.println("[Close Database]: Error closing the databse(SQLException). Contact the author or run this program with -showSTs to print the stack traces.");
+				// If it does not print the stack trace for error logging if it
+				// is enabled.
+				if (Launcher.PRINT_STACK_TRACES) {
+					e.printStackTrace();
+				}
 				// And return false to show that it failed
 				return false;
 			}

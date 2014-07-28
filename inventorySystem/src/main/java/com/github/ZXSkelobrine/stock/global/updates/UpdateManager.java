@@ -40,13 +40,26 @@ public class UpdateManager {
 					try {
 						launchNewVersion(versionAppend);
 					} catch (IOException e) {
-						e.printStackTrace();
+						// Print a brief description of the error.
+						System.out.println("[Launch Update Procedure]: Error launching new version(IOException). Contact the author or run this program with -showSTs to print the stack traces.");
+						// If it does not print the stack trace for error
+						// logging if it
+						// is enabled.
+						if (Launcher.PRINT_STACK_TRACES) {
+							e.printStackTrace();
+						}
 					}
 					System.exit(0);
 				}
 			}, null, null);
 		} catch (Exception e) {
-			e.printStackTrace();
+			// Print a brief description of the error.
+			System.out.println("[Launch Update Procedure]: Unknown error(Exception). Contact the author or run this program with -showSTs to print the stack traces.");
+			// If it does not print the stack trace for error logging if it
+			// is enabled.
+			if (Launcher.PRINT_STACK_TRACES) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -81,15 +94,17 @@ public class UpdateManager {
 		return false;
 	}
 
+	@SuppressWarnings("unused")
 	public static void launchNewVersion(String version) throws IOException {
-		String javaPath = System.getProperty("java.home") + System.getProperty("file.separator") + "bin" + System.getProperty("file.separator") + "java.exe";
-		String workingDirectory = System.getProperty("user.dir") + System.getProperty("file.separator");
+		String sep = System.getProperty("file.separator");
+		String javaPath = System.getProperty("java.home") + sep + "bin" + sep + "java.exe";
+		String workingDirectory = System.getProperty("user.dir") + sep;
 		ProcessBuilder pb = new ProcessBuilder(javaPath, "-jar", "New Hook Stock Solutions-" + version + ".jar");
 		pb.directory(new File(workingDirectory));
 		Process p = pb.start();
 	}
 
-	public static void checkForUpdate() throws Throwable {
+	public static boolean checkForUpdate() throws Throwable {
 		Document doc = Jsoup.parse(new URL("https://github.com/ZXSkelobrine/New-Hook-Stock-Solutions/tree/master/Files"), 3000);
 		Elements files = doc.getElementsByClass("js-directory-link");
 		for (Element e : files) {
@@ -107,6 +122,7 @@ public class UpdateManager {
 				}
 			}
 		}
+		return updateAvailable;
 	}
 
 	public static void processUpdate() {
@@ -117,11 +133,4 @@ public class UpdateManager {
 		downloadFile(versionAppend);
 	}
 
-	public static void main(String[] args) {
-		try {
-			checkForUpdate();
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-	}
 }
