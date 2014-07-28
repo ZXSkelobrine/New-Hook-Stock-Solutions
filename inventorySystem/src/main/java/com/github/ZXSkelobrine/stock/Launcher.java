@@ -149,7 +149,7 @@ public class Launcher {
 				System.out.println("There is an error in your launch flags: \n\t " + addedHelp);
 			}
 			System.out.println("New Hook Stock Solutions: Launch Flags:");
-			System.out.println("\t*WARNING* These are case sensitive -showSts will not work. It must be -showSTs for example.");
+			System.out.println("\t *WARNING* These are case sensitive -showSts will not work. It must be -showSTs for example.");
 			System.out.println("\t -help - Print this message");
 			System.out.println("\t -test - Print the database location");
 			System.out.println("\t -checkForUpdate - Checks for and update only");
@@ -157,7 +157,8 @@ public class Launcher {
 			System.out.println("\t -showSTs - Shows stack traces");
 			System.out.println("\t -port: <Serial Port> - The port number (Eg. 5 == COM5)");
 			System.out.println("\t -customLaf: <Look and Feel> - The look and feel to use. Must be either: system, window, custom");
-
+		} else {
+			System.out.println("[Help]: You can add -help to the command to see launch flags");
 		}
 	}
 
